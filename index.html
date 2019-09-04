@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document </title>
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/skeleton.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+
+<body>
+
+    <div id="contenido">
+        <div class="container">
+
+            <h1>Local Storage</h1>
+            <div class="row">
+                <div class="six columns">
+                    <label for="tweet">Tweet:</label>
+                    <form action="#" id="formulario">
+                            <label for="tweet"></label>
+                            <textarea id="tweet" class="u-full-width"></textarea>
+                            <input type="submit" class="button u-full-width button-primary" value="Agregar">
+                    </form>
+                </div>
+                <div class="six columns">
+                    <h2>Mis Tweets</h2>
+                    <div id="lista-tweets"></div>
+                </div>
+            </div>
+
+        </div>
+    </div> <!--#contenido-->
+    <script>
+        
+    </script>
+    <script src="assets/js/app.js"></script>
+    <script>    
+
+            const listaTweets = document.getElementById('lista-tweets');
+
+            function getLocalStorage(){
+                let tweets;
+
+                if(localStorage.getItem('tweets') === null){
+                    tweets = [];
+                } else {
+                    tweets = JSON.parse(localStorage.getItem('tweets'));
+                }
+
+                return tweets;
+            }
+           
+            document.addEventListener("DOMContentLoaded", function(){
+                let tweets;
+
+                tweets = getLocalStorage();
+
+                tweets.forEach( function(tweet){
+                    //Crear botón eliminar
+                    const botonBorrar = document.createElement('a');
+                    botonBorrar.classList = 'borrar-tweet';
+                    botonBorrar.innerText = 'X';
+
+
+                    const li = document.createElement('li');
+                    li.innerText = tweet;
+                    li.appendChild(botonBorrar);
+                    listaTweets.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
